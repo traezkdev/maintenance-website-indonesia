@@ -2,356 +2,394 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="<?php echo MWI_PLUGIN_URL; ?>assets/css/maintenance-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: <?php echo htmlspecialchars($bg_color); ?>;
-            --text-color: <?php echo htmlspecialchars($text_color); ?>;
+            --corp-bg: #f8fafc;
+            --corp-surface: #ffffff;
+            --corp-primary: #0f172a;
+            --corp-accent: #3b82f6;
+            --corp-text: #334155;
+            --corp-text-light: #64748b;
+            --corp-border: #e2e8f0;
+            --corp-radius: 1px; /* More square for corporate feel */
         }
+
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Roboto', sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--corp-bg);
+            color: var(--corp-text);
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Abstract Business Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
         
-        .maintenance-container {
-            max-width: 900px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        .maintenance-header {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .maintenance-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .maintenance-title {
-            font-size: 2.2em;
-            margin: 0 0 15px 0;
-            font-weight: 500;
-        }
-        
-        .maintenance-subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .maintenance-content {
-            padding: 50px 40px;
-            text-align: center;
-        }
-        
-        .maintenance-message {
-            font-size: 1.1em;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            color: #5a6c7d;
-        }
-        
-        .countdown-container {
+        /* Two-Column Layout Container */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            background: var(--corp-surface);
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 40px 0;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .countdown-item {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            padding: 25px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .countdown-item:hover {
-            border-color: #3498db;
-            transform: translateY(-2px);
-        }
-        
-        .countdown-number {
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #3498db;
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .countdown-label {
-            font-size: 0.9em;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        
-        .progress-section {
-            background: #f8f9fa;
-            padding: 30px;
-            margin: 30px 0;
-            border-radius: 8px;
-        }
-        
-        .progress-title {
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
+            grid-template-columns: 1.2fr 0.8fr;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--corp-border);
             overflow: hidden;
-            margin-bottom: 10px;
+            border-radius: 4px; /* Subtle radius */
         }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            width: 0;
-            transition: width 2s ease-in-out;
-        }
-        
-        .progress-text {
-            font-size: 0.9em;
-            color: #7f8c8d;
-            margin: 0;
-        }
-        
-        .contact-section {
-            background: #2c3e50;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .contact-title {
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .contact-info {
+
+        /* Left Content Side */
+        .content-side {
+            padding: 4rem 3rem;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
         }
-        
-        .contact-item {
+
+        /* Right Visual Side */
+        .visual-side {
+            background: var(--corp-primary);
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #ecf0f1;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .visual-side::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.05) 60%, transparent 60%);
+            animation: shine 8s infinite linear;
+        }
+
+        /* Typography & Elements */
+        .brand-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eff6ff;
+            color: var(--corp-accent);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            width: fit-content;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--corp-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            color: var(--corp-text-light);
+            margin-bottom: 3rem;
+            max-width: 90%;
+        }
+
+        /* Countdown Corporate Style */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            border-top: 1px solid var(--corp-border);
+            padding-top: 2rem;
+        }
+
+        .countdown-unit {
+            text-align: left;
+        }
+
+        .countdown-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--corp-primary);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .countdown-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--corp-text-light);
+        }
+
+        /* Progress Bar */
+        .status-container {
+            margin-bottom: 2rem;
         }
         
-        .contact-item i {
-            font-size: 1.2em;
-            color: #3498db;
-        }
-        
-        .contact-link {
-            color: #3498db;
-            text-decoration: none;
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-track {
+            height: 6px;
+            background: var(--corp-border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--corp-accent);
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Footer / Contact */
+        .footer-info {
+            margin-top: auto;
+            border-top: 1px solid var(--corp-border);
+            padding-top: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--corp-text-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-link {
+            color: var(--corp-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
         }
         
         .contact-link:hover {
-            color: #5dade2;
+            color: var(--corp-accent);
         }
-        
-        .footer {
-            background: #34495e;
-            color: #bdc3c7;
-            padding: 20px;
+
+        /* Right Side Content */
+        .visual-content {
             text-align: center;
-            font-size: 0.9em;
+            z-index: 1;
+        }
+
+        .visual-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Loading Dots */
+        .loading-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            margin: 0 4px;
+            animation: dots 1.4s infinite ease-in-out both;
+        }
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes dots {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
         }
         
-        @media (max-width: 768px) {
-            .maintenance-container {
-                margin: 20px;
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 850px) {
+            .container {
+                grid-template-columns: 1fr;
+                width: 100%;
+                max-width: none;
+                height: 100vh;
+                border: none;
                 border-radius: 0;
             }
-            
-            .maintenance-header,
-            .maintenance-content,
-            .contact-section {
-                padding: 30px 20px;
+            .visual-side {
+                display: none; /* Hide visual on mobile for focus */
             }
-            
-            .countdown-container {
+            .content-side {
+                padding: 2rem;
+                justify-content: flex-start;
+            }
+            h1 { font-size: 2rem; }
+            .countdown-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            .maintenance-title {
-                font-size: 1.8em;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 20px;
+                gap: 2rem 1rem;
             }
         }
-        
-        /* Professional animations */
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .maintenance-content > * {
-            animation: slideInUp 0.6s ease-out;
-        }
-        
-        .countdown-item:nth-child(1) { animation-delay: 0.1s; }
-        .countdown-item:nth-child(2) { animation-delay: 0.2s; }
-        .countdown-item:nth-child(3) { animation-delay: 0.3s; }
-        .countdown-item:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <div class="maintenance-container">
-        <div class="maintenance-header">
-            <div class="maintenance-icon"><?php echo htmlspecialchars($maintenance_icon); ?></div>
-            <h1 class="maintenance-title"><?php echo htmlspecialchars($title); ?></h1>
-            <p class="maintenance-subtitle"><?php echo htmlspecialchars($contact_text); ?></p>
-        </div>
-        
-        <div class="maintenance-content">
-            <div class="maintenance-message">
-                <?php echo $message; ?>
-            </div>
+
+    <div class="bg-pattern"></div>
+
+    <div class="container">
+        <!-- Main Content (Left) -->
+        <main class="content-side">
             
+            <div class="brand-pill">
+                <i class="fa-solid fa-building-circle-check"></i>
+                System Maintenance
+            </div>
+
+            <h1><?php echo htmlspecialchars($title); ?></h1>
+            
+            <div class="message">
+                <?php echo wpautop($message); ?>
+            </div>
+
+            <!-- Countdown -->
             <?php if (!empty($end_time) && strtotime($end_time) > time()): ?>
-            <div class="countdown-container">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Hari</span>
+            <div class="countdown-grid" id="countdown-wrapper" data-end-time="<?php echo htmlspecialchars($end_time); ?>">
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">Days</div>
                 </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Jam</span>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
                 </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Menit</span>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
                 </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Detik</span>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
                 </div>
             </div>
             <?php endif; ?>
-            
-            <div class="progress-section">
-                <div class="progress-title">Status Pemeliharaan</div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+
+            <!-- Progress Status -->
+            <div class="status-container">
+                <div class="status-header">
+                    <span style="color: var(--corp-primary); font-weight: 600;">Current Status</span>
+                    <span><?php echo htmlspecialchars($progress_text); ?></span>
                 </div>
-                <p class="progress-text"><?php echo htmlspecialchars($progress_text); ?></p>
-            </div>
-        </div>
-        
-        <div class="contact-section">
-            <h3 class="contact-title"><?php echo htmlspecialchars($contact_text); ?></h3>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i>📧</i>
-                    <span>Email: <a href="mailto:<?php echo htmlspecialchars($contact_email); ?>" class="contact-link"><?php echo htmlspecialchars($contact_email); ?></a></span>
-                </div>
-                <div class="contact-item">
-                    <i>📞</i>
-                    <span>Telepon: <a href="tel:<?php echo htmlspecialchars($contact_phone); ?>" class="contact-link"><?php echo htmlspecialchars($contact_phone); ?></a></span>
+                <div class="progress-track">
+                    <div class="progress-bar" style="width: 0%"></div>
                 </div>
             </div>
-        </div>
-        
-        <div class="footer">
-            <p><?php echo htmlspecialchars($footer_text); ?></p>
-        </div>
+
+            <!-- Footer Contact -->
+            <footer class="footer-info">
+                <div>
+                   <?php echo htmlspecialchars($footer_text); ?>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <?php if (!empty($contact_email)): ?>
+                    <a href="mailto:<?php echo htmlspecialchars($contact_email); ?>" class="contact-link">Email Us</a>
+                    <?php endif; ?>
+                    <?php if (!empty($contact_phone)): ?>
+                    <a href="tel:<?php echo htmlspecialchars($contact_phone); ?>" class="contact-link">Call Support</a>
+                    <?php endif; ?>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Visual Side (Right) -->
+        <aside class="visual-side">
+            <div class="visual-content">
+                <div class="visual-icon">
+                    <?php echo !empty($maintenance_icon) ? htmlspecialchars($maintenance_icon) : '🏢'; ?>
+                </div>
+                <h3 style="margin-top: 20px; font-weight: 500; font-size: 1.25rem;">We'll be back shortly</h3>
+                <div class="loading-dots" style="margin-top: 15px;">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </aside>
     </div>
-    
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Animate progress bar
-        setTimeout(function() {
-            const progressFill = document.querySelector('.progress-fill');
-            if (progressFill) {
-                progressFill.style.width = '65%';
-            }
-        }, 1000);
-        
-        // Start countdown if end time exists
-        <?php if (!empty($end_time)): ?>
-        const endTime = '<?php echo htmlspecialchars($end_time); ?>';
-        startCountdown(endTime);
-        <?php endif; ?>
-    });
-    
-    function startCountdown(endTime) {
-        const countdownTimer = setInterval(function() {
-            const now = new Date().getTime();
-            const end = new Date(endTime).getTime();
-            const distance = end - now;
+        // Animate Progress Bar to 80% (Simulation)
+        setTimeout(() => {
+            const bar = document.querySelector('.progress-bar');
+            if(bar) bar.style.width = '80%'; 
+        }, 500);
+
+        // Countdown Logic
+        const wrapper = document.getElementById('countdown-wrapper');
+        if (wrapper) {
+            const endTime = new Date(wrapper.dataset.endTime).getTime();
             
-            if (distance < 0) {
-                clearInterval(countdownTimer);
-                document.querySelector('.countdown-container').innerHTML = 
-                    '<div style="grid-column: 1 / -1; padding: 20px; background: #d4edda; color: #155724; border-radius: 8px; border: 1px solid #c3e6cb;">' +
-                    '<strong>✅ Pemeliharaan telah selesai!</strong><br>' +
-                    '<small>Halaman akan dimuat ulang secara otomatis dalam beberapa detik.</small>' +
-                    '</div>';
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
                 
-                // Auto refresh after 5 seconds
-                setTimeout(function() {
+                if (distance < 0) {
+                    clearInterval(timer);
                     window.location.reload();
-                }, 5000);
-                return;
-            }
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }, 1000);
-    }
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }, 1000);
+        }
+    });
     </script>
 </body>
 </html>

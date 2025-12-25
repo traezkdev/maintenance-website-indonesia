@@ -139,6 +139,7 @@ function mwi_admin_scripts($hook) {
     
     wp_enqueue_style('wp-color-picker');
     wp_enqueue_script('wp-color-picker');
+    wp_enqueue_style('mwi-admin-style', MWI_PLUGIN_URL . 'assets/css/admin-style.css', array(), MWI_VERSION);
     wp_enqueue_script('mwi-admin', MWI_PLUGIN_URL . 'assets/js/admin-script.js', array('jquery', 'wp-color-picker'), MWI_VERSION, true);
     
     // Localize script untuk AJAX
@@ -490,19 +491,19 @@ if (isset($_POST['mwi_index_html_content'])) {
             <label>
                 <input type="radio" name="mwi_template" value="default" <?php checked($template, 'default'); ?>>
                 🇮🇩 Indonesia Classic (Default)
-            </label><br>
+            </label>
             <label>
                 <input type="radio" name="mwi_template" value="modern" <?php checked($template, 'modern'); ?>>
                 ✨ Modern Minimalist
-            </label><br>
+            </label>
             <label>
                 <input type="radio" name="mwi_template" value="corporate" <?php checked($template, 'corporate'); ?>>
                 🏢 Corporate Professional
-            </label><br>
+            </label>
             <label>
                 <input type="radio" name="mwi_template" value="creative" <?php checked($template, 'creative'); ?>>
                 🎨 Creative Colorful
-            </label><br>
+            </label>
             <label>
                 <input type="radio" name="mwi_template" value="custom" <?php checked($template, 'custom'); ?>>
                 📄 Custom Template (index.html)
@@ -806,7 +807,7 @@ jQuery(document).ready(function($) {
             <div class="mwi-sidebar">
                 <div class="mwi-info-box">
                     <h3>📊 Informasi Plugin</h3>
-<p><strong>Versi:</strong> 2.5.2</p>
+<p><strong>Versi:</strong> 2.5.3</p>
 <p><strong>Pembuat:</strong><a href="https://instagram.com/alfinf1rdaus">Alfin firdaus </a></p>
                     <p><strong>Status:</strong> 
                         <?php if ($enabled): ?>
@@ -854,141 +855,6 @@ jQuery(document).ready(function($) {
         </div>
     </div>
     
-    <style>
-    .mwi-admin-container {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-    }
-    .mwi-main-content {
-        flex: 2;
-    }
-    .mwi-sidebar {
-        flex: 1;
-        max-width: 300px;
-    }
-    .mwi-info-box {
-        background: #f1f1f1;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        border-left: 4px solid #0073aa;
-    }
-    .mwi-info-box h3, .mwi-info-box h4 {
-        margin-top: 0;
-        color: #23282d;
-    }
-    .mwi-info-box ul, .mwi-info-box ol {
-        margin-left: 20px;
-    }
-    .mwi-info-box li {
-        margin-bottom: 5px;
-    }
-    .mwi-toggle-container {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 10px;
-    }
-    
-    .mwi-toggle {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-        flex-shrink: 0;
-    }
-    
-    .mwi-toggle input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-    
-    .mwi-slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: .4s;
-        border-radius: 34px;
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
-    }
-    
-    .mwi-slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: .4s;
-        border-radius: 50%;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    
-    input:checked + .mwi-slider {
-        background-color: #2271b1;
-    }
-    
-    input:checked + .mwi-slider:before {
-        transform: translateX(26px);
-    }
-    
-    .mwi-toggle-label {
-        font-size: 14px;
-        font-weight: 600;
-        color: #1d2327;
-    }
-    
-    input:focus + .mwi-slider {
-        box-shadow: 0 0 1px #2271b1;
-    }
-    /* Template Preview Styles */
-    .mwi-template-preview {
-        margin-top: 15px;
-        display: grid;
-        gap: 20px;
-    }
-    
-    .template-preview-item {
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .template-preview-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    }
-    
-    .template-preview-item h3 {
-        margin: 10px 0;
-        font-size: 1.2em;
-    }
-    
-    .template-preview-item p {
-        color: #666;
-        margin: 5px 0;
-    }
-    
-    @media (max-width: 768px) {
-        .mwi-admin-container {
-            flex-direction: column;
-        }
-        .mwi-sidebar {
-            max-width: none;
-        }
-        .mwi-template-preview {
-            grid-template-columns: 1fr;
-        }
-    }
-    </style>
+
     <?php
 }

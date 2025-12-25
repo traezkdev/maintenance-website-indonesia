@@ -194,7 +194,7 @@ Bahasa yang tersedia:
 
 == About the Developer ==
 
-TraezKdev adalah seorang developer WordPress berpengalaman dari Indonesia yang berfokus pada pembuatan plugin dan theme berkualitas tinggi. Plugin ini dibuat dengan dedikasi untuk komunitas WordPress Indonesia. free
+TraezKdev adalah seorang developer WordPress berpengalaman dari Indonesia yang berfokus pada pembuatan plugin dan theme berkualitas tinggi. Plugin ini dibuat dengan dedikasi untuk komunitas WordPress Indonesia.
 
 == License ==
 

@@ -2,262 +2,351 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="<?php echo MWI_PLUGIN_URL; ?>assets/css/maintenance-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+
     <style>
         :root {
-            --bg-color: <?php echo htmlspecialchars($bg_color); ?>;
-            --text-color: <?php echo htmlspecialchars($text_color); ?>;
+            /* Warna Modern Vibrant */
+            --modern-bg: #0f172a;
+            --modern-card: rgba(30, 41, 59, 0.7);
+            --modern-border: rgba(148, 163, 184, 0.1);
+            --modern-text: #f1f5f9;
+            --modern-text-mute: #94a3b8;
+            --gradient-1: #6366f1; /* Indigo */
+            --gradient-2: #ec4899; /* Pink */
+            --gradient-3: #8b5cf6; /* Violet */
+            --glass-blur: blur(12px);
         }
-        
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-color), #667eea);
-            color: var(--text-color);
-            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--modern-bg);
+            color: var(--modern-text);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .maintenance-container {
-            max-width: 800px;
-            padding: 40px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .maintenance-title {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-        
-        .maintenance-message {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 20px;
-            border-radius: 15px;
-            min-width: 100px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .countdown-number {
-            font-size: 2.5em;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .countdown-label {
-            font-size: 0.9em;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .progress-container {
-            margin: 30px 0;
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
             overflow: hidden;
-            margin: 10px 0;
+            position: relative;
         }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--text-color), rgba(255, 255, 255, 0.5));
-            width: 0;
-            transition: width 1s ease-in-out;
+
+        /* Ambient Dynamic Background */
+        .ambient-light {
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 120vw; height: 120vw;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(15,23,42,0) 60%);
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            pointer-events: none;
         }
-        
-        .contact-info {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
         }
-        
-        .contact-links {
+        .orb-1 { width: 300px; height: 300px; background: var(--gradient-1); top: 10%; left: 10%; }
+        .orb-2 { width: 400px; height: 400px; background: var(--gradient-2); bottom: 10%; right: 10%; animation-delay: -5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 40px); }
+        }
+
+        /* Modern Typography Container */
+        .modern-container {
+            width: 100%;
+            max-width: 768px;
+            padding: 2rem;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Logo / Icon Area */
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 2.5rem;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
         }
         
-        .contact-link {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+        .icon-wrapper:hover {
+            transform: rotate(0deg) scale(1.05);
         }
-        
-        .contact-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        @media (max-width: 768px) {
-            .maintenance-container {
-                margin: 20px;
-                padding: 30px;
-            }
-            
-            .countdown-container {
-                flex-wrap: wrap;
-            }
-            
-            .countdown-item {
-                min-width: 80px;
-            }
-            
-            .maintenance-title {
-                font-size: 2em;
-            }
-        }
-        
-        /* Modern animations */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .maintenance-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--text-color), rgba(255, 255, 255, 0.8));
+
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float 6s ease-in-out infinite;
+            letter-spacing: -0.02em;
+        }
+
+        .message {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--modern-text-mute);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Modern Grid Countdown */
+        .modern-countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .count-box {
+            background: var(--modern-card);
+            border: 1px solid var(--modern-border);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            backdrop-filter: var(--glass-blur);
+            transition: transform 0.3s ease;
+        }
+
+        .count-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99,102,241,0.3);
+        }
+
+        .count-val {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .count-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--modern-text-mute);
+        }
+
+        /* Minimal Progress */
+        .minimal-progress {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-track {
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .progress-indicator {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+            width: 0;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(99,102,241,0.4);
+            position: relative;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--modern-text-mute);
+            margin-top: 0.75rem;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-modern {
+            padding: 0.875rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: #fff;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 640px) {
+            h1 { font-size: 2.5rem; }
+            .modern-countdown { gap: 0.75rem; }
+            .count-val { font-size: 1.75rem; }
+            .count-box { padding: 1rem 0.5rem; }
+            .icon-wrapper { width: 60px; height: 60px; font-size: 1.75rem; }
         }
     </style>
 </head>
 <body>
-    <div class="maintenance-container">
-    <div class="maintenance-icon floating-element"><?php echo htmlspecialchars($maintenance_icon); ?></div>
-    
-    <h1 class="maintenance-title">
-        <?php echo htmlspecialchars($title); ?>
-    </h1>
-    
-    <div class="maintenance-message">
-        <?php echo $message; ?>
-    </div>
-    
-    <?php if (!empty($end_time) && strtotime($end_time) > time()): ?>
-    <div class="countdown-container">
-        <div class="countdown-item">
-            <span class="countdown-number" id="days">00</span>
-            <span class="countdown-label">Hari</span>
+
+    <!-- Dynamic Background -->
+    <div class="ambient-light"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="modern-container">
+        
+        <div class="icon-wrapper">
+            <?php echo !empty($maintenance_icon) ? htmlspecialchars($maintenance_icon) : '<i class="ri-tools-fill"></i>'; ?>
         </div>
-        <div class="countdown-item">
-            <span class="countdown-number" id="hours">00</span>
-            <span class="countdown-label">Jam</span>
+
+        <h1><?php echo htmlspecialchars($title); ?></h1>
+        
+        <div class="message">
+            <?php echo wpautop($message); ?>
         </div>
-        <div class="countdown-item">
-            <span class="countdown-number" id="minutes">00</span>
-            <span class="countdown-label">Menit</span>
+
+        <?php if (!empty($end_time) && strtotime($end_time) > time()): ?>
+        <div class="modern-countdown" id="countdown-wrapper" data-end-time="<?php echo htmlspecialchars($end_time); ?>">
+            <div class="count-box">
+                <div class="count-val" id="days">00</div>
+                <div class="count-label">Days</div>
+            </div>
+            <div class="count-box">
+                <div class="count-val" id="hours">00</div>
+                <div class="count-label">Hours</div>
+            </div>
+            <div class="count-box">
+                <div class="count-val" id="minutes">00</div>
+                <div class="count-label">Mins</div>
+            </div>
+            <div class="count-box">
+                <div class="count-val" id="seconds">00</div>
+                <div class="count-label">Secs</div>
+            </div>
         </div>
-        <div class="countdown-item">
-            <span class="countdown-number" id="seconds">00</span>
-            <span class="countdown-label">Detik</span>
+        <?php endif; ?>
+
+        <div class="minimal-progress">
+            <div class="progress-track">
+                <div class="progress-indicator"></div>
+            </div>
+            <div class="progress-info">
+                <span>Progress Update</span>
+                <span><?php echo htmlspecialchars($progress_text); ?></span>
+            </div>
         </div>
-    </div>
-    <?php endif; ?>
-    
-    <div class="progress-container">
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-        <p class="progress-text"><?php echo htmlspecialchars($progress_text); ?></p>
-    </div>
-    
-    <div class="contact-info">
-        <p><?php echo htmlspecialchars($contact_text); ?></p>
-        <div class="contact-links">
-            <a href="mailto:<?php echo htmlspecialchars($contact_email); ?>" class="contact-link">
-                Email
+
+        <div class="actions">
+            <?php if (!empty($contact_email)): ?>
+            <a href="mailto:<?php echo htmlspecialchars($contact_email); ?>" class="btn-modern btn-primary">
+                <i class="ri-mail-send-line"></i> Contact Us
             </a>
-            <a href="tel:<?php echo htmlspecialchars($contact_phone); ?>" class="contact-link">
-                Telepon
+            <?php endif; ?>
+            
+            <?php if (!empty($contact_phone)): ?>
+            <a href="tel:<?php echo htmlspecialchars($contact_phone); ?>" class="btn-modern btn-outline">
+                <i class="ri-phone-line"></i> Support
             </a>
+            <?php endif; ?>
         </div>
+
+        <div style="margin-top: 3rem; font-size: 0.8rem; opacity: 0.5;">
+            <?php echo htmlspecialchars($footer_text); ?>
+        </div>
+
     </div>
-    </div>
-    
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Animate progress bar
-        setTimeout(function() {
-            document.querySelector('.progress-fill').style.width = '75%';
+        // Animate Progress Bar
+        setTimeout(() => {
+            const bar = document.querySelector('.progress-indicator');
+            if(bar) bar.style.width = '70%'; // Simulation value
         }, 500);
-        
-        // Start countdown if end time exists
-        <?php if (!empty($end_time)): ?>
-        const endTime = '<?php echo htmlspecialchars($end_time); ?>';
-        startCountdown(endTime);
-        <?php endif; ?>
+
+        // Countdown Logic
+        const wrapper = document.getElementById('countdown-wrapper');
+        if (wrapper) {
+            const endTime = new Date(wrapper.dataset.endTime).getTime();
+            
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                
+                if (distance < 0) {
+                    clearInterval(timer);
+                    window.location.reload();
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }, 1000);
+        }
     });
-    
-    function startCountdown(endTime) {
-        const countdownTimer = setInterval(function() {
-            const now = new Date().getTime();
-            const end = new Date(endTime).getTime();
-            const distance = end - now;
-            
-            if (distance < 0) {
-                clearInterval(countdownTimer);
-                document.querySelector('.countdown-container').innerHTML = 
-                    '<div class="countdown-item" style="background: rgba(46, 204, 113, 0.2);">' +
-                    '<span style="color: #2ecc71;">✓</span> Maintenance selesai!' +
-                    '</div>';
-                return;
-            }
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }, 1000);
-    }
     </script>
 </body>
 </html>

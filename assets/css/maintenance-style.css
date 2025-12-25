@@ -1,320 +1,255 @@
-/* Maintenance Website Indonesia - Style */
+/* Global Unified CSS - Maintenance Templates (1–4) */
 
-/* Reset dan Base Styles */
+/* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
-/* Container */
 .maintenance-container {
-    width: 100%;
-    max-width: 800px;
-    padding: 2rem;
-    text-align: center;
-    position: relative;
-    z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  position: relative;
+  text-align: center;
 }
 
-.maintenance-content {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* Icon */
 .maintenance-icon {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-    animation: float 3s ease-in-out infinite;
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  animation: float 3s ease-in-out infinite;
 }
 
-.maintenance-icon i {
-    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Typography */
 .maintenance-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
 .maintenance-message {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  color: #fff;
 }
 
-/* Countdown Timer */
 .countdown-container {
-    margin: 2rem 0;
-}
-
-.countdown-container h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.countdown-timer {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .countdown-item {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 1rem;
-    border-radius: 10px;
-    min-width: 100px;
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  min-width: 80px;
+  text-align: center;
+  animation: float 6s ease-in-out infinite;
 }
 
 .countdown-number {
-    font-size: 2rem;
-    font-weight: 700;
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
 }
 
 .countdown-label {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
-/* Progress Bar */
 .progress-container {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
 
 .progress-bar {
-    background: rgba(255, 255, 255, 0.2);
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-    margin: 1rem 0;
+  height: 10px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .progress-fill {
-    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-    height: 100%;
-    width: 0;
-    transition: width 1s ease-in-out;
-    border-radius: 5px;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+  transition: width 1s ease-in-out;
+  border-radius: 5px;
 }
 
 .progress-text {
-    font-size: 0.9rem;
-    opacity: 0.8;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
 }
 
-/* Contact Info */
-.contact-info {
-    margin: 2rem 0;
+.contact-info, .contact-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
 }
 
 .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .contact-link {
-    color: inherit;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255,255,255,0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
 .contact-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
 }
 
-.contact-link i {
-    margin-right: 0.5rem;
+.maintenance-footer, .footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  text-align: center;
 }
 
-/* Footer */
-.maintenance-footer {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    opacity: 0.8;
+.bg-animation, .creative-elements {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.maintenance-footer small {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
+.shape, .floating-shape {
+  position: absolute;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  animation: floatAround 20s linear infinite;
 }
 
-/* Background Animation */
-.bg-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
+/* CORPORATE THEME */
+.template-3 body,
+body.template-3 {
+  background-color: #f5f7fa;
+  color: #2c3e50;
 }
 
-.floating-shapes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.template-3 .maintenance-container {
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
 }
 
-.shape {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    animation: float-around 20s linear infinite;
+.template-3 .maintenance-title {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #2c3e50;
+  text-shadow: none;
 }
 
-.shape-1 {
-    width: 100px;
-    height: 100px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
+.template-3 .maintenance-message {
+  color: #34495e;
 }
 
-.shape-2 {
-    width: 150px;
-    height: 150px;
-    top: 60%;
-    right: 15%;
-    animation-delay: -5s;
+.template-3 .countdown-item {
+  background: #ecf0f1;
+  color: #2c3e50;
 }
 
-.shape-3 {
-    width: 80px;
-    height: 80px;
-    bottom: 20%;
-    left: 20%;
-    animation-delay: -10s;
+.template-3 .progress-bar {
+  background: #d0d0d0;
 }
 
-.shape-4 {
-    width: 120px;
-    height: 120px;
-    top: 30%;
-    right: 30%;
-    animation-delay: -15s;
+.template-3 .progress-fill {
+  background: linear-gradient(90deg, #2980b9, #27ae60);
 }
 
-.shape-5 {
-    width: 60px;
-    height: 60px;
-    bottom: 30%;
-    right: 10%;
-    animation-delay: -7s;
+.template-3 .contact-info {
+  background: #ecf0f1;
+  color: #2c3e50;
 }
 
-/* Animations */
+.template-3 .contact-link {
+  background: #3498db;
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 500;
+}
+
+.template-3 .contact-link:hover {
+  background: #2c80b4;
+}
+
+.template-3 .maintenance-footer {
+  color: #7f8c8d;
+}
+
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
-@keyframes float-around {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-        transform: translate(100px, 100px) rotate(90deg);
-    }
-    50% {
-        transform: translate(0, 200px) rotate(180deg);
-    }
-    75% {
-        transform: translate(-100px, 100px) rotate(270deg);
-    }
-    100% {
-        transform: translate(0, 0) rotate(360deg);
-    }
+@keyframes floatAround {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(100px, 100px) rotate(180deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    .maintenance-container {
-        padding: 1rem;
-    }
-    
-    .maintenance-content {
-        padding: 2rem 1rem;
-    }
-    
-    .maintenance-title {
-        font-size: 2rem;
-    }
-    
-    .maintenance-message {
-        font-size: 1rem;
-    }
-    
-    .countdown-timer {
-        flex-wrap: wrap;
-    }
-    
-    .countdown-item {
-        min-width: 80px;
-        padding: 0.8rem;
-    }
-    
-    .countdown-number {
-        font-size: 1.5rem;
-    }
-    
-    .contact-links {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  .maintenance-container {
+    padding: 1rem;
+  }
+
+  .maintenance-title {
+    font-size: 2rem;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem;
+  }
+
+  .contact-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
 }
 
-/* Print Styles */
 @media print {
-    .bg-animation,
-    .progress-container,
-    .contact-info {
-        display: none;
-    }
-    
-    .maintenance-content {
-        box-shadow: none;
-        padding: 0;
-    }
-    
-    .maintenance-title,
-    .maintenance-message {
-        color: #000 !important;
-    }
+  .bg-animation, .creative-elements, .progress-container, .contact-info {
+    display: none;
+  }
 }

@@ -3,7 +3,7 @@
  * Plugin Name: Maintenance Website Indonesia
  * Plugin URI: https://github.com/traezkdev/maintenance-website-indonesia
  * Description: Plugin khusus untuk mengaktifkan mode maintenance pada website WordPress dengan tampilan khas Indonesia. Dibuat oleh developer Indonesia.
- * Version: 2.5.2
+ * Version: 2.5.3
  * Author: Traezkdev
  * Author URI: https://github.com/traezkdev
  * License: GPL v2 or later
